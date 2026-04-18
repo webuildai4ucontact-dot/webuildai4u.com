@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  
+  --color-pbg: #0d0b1e;
+  --color-psection: #1e1b4b;
+  --color-paccent: #4338ca;
+  --color-ptext: #ffffff;
+  --color-pmuted: #cbd5e1;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-pbg);
+  color: var(--color-ptext);
+  font-family: var(--font-sans);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-pbg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-paccent);
+  border-radius: 4px;
+}
