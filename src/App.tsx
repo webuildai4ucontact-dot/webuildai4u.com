@@ -7,8 +7,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, Settings, Cpu, Send, Globe, Database, 
-  Mail, Zap, MessageSquare, Target, Search, RefreshCw, ShoppingCart, 
-  Briefcase, Rocket, MapPin, Lightbulb, Users, Menu, X, ArrowUp, CheckCircle
+  Mail, Zap, Target, Search, RefreshCw, 
+  Briefcase, Rocket, MapPin, Lightbulb, Menu, X, ArrowUp,
+  Monitor, Layout, CheckCircle2, ShieldCheck
 } from 'lucide-react';
 import { translations } from './lib/translations';
 
@@ -115,7 +116,6 @@ export default function App() {
               <a href="#about" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.about}</a>
               <a href="#services" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.services}</a>
               <a href="#process" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.process}</a>
-              <a href="#cases" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.cases}</a>
               <a href="#contact" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.contact}</a>
             </div>
             
@@ -173,7 +173,6 @@ export default function App() {
                 { name: t.nav.about, href: '#about' },
                 { name: t.nav.services, href: '#services' },
                 { name: t.nav.process, href: '#process' },
-                { name: t.nav.cases, href: '#cases' },
                 { name: t.nav.contact, href: '#contact' }
               ].map((item) => (
                 <a 
@@ -195,21 +194,32 @@ export default function App() {
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(76,29,149,0.2)_0%,transparent_70%)] z-0 pointer-events-none"></div>
         <div className="absolute top-[40%] right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(34,211,238,0.08)_0%,transparent_70%)] z-0 pointer-events-none"></div>
 
-        <motion.div className="relative z-10 max-w-[1000px] flex flex-col items-center" initial="hidden" animate="visible" variants={staggerContainer}>
+        <motion.div className="relative z-10 max-w-[1100px] flex flex-col items-center" initial="hidden" animate="visible" variants={staggerContainer}>
           <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#22d3ee]/30 bg-[#22d3ee]/10 text-[12px] font-bold uppercase tracking-widest text-[#22d3ee] mb-[32px]">
-            <Zap className="w-3.5 h-3.5" />
+            <CheckCircle2 className="w-3.5 h-3.5" />
             {t.hero.badge}
           </motion.div>
-          <motion.h1 key={lang} variants={fadeIn} className="text-[44px] sm:text-[56px] lg:text-[72px] leading-[1.05] font-[800] mb-[24px] tracking-[-0.04em]">
+          <motion.h1 key={lang} variants={fadeIn} className="text-[44px] sm:text-[64px] lg:text-[86px] leading-[1.0] font-[900] mb-[24px] tracking-[-0.04em] text-white">
             {t.hero.titlePre} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22d3ee] to-[#a855f7]">{t.hero.titleHighlight}</span>
           </motion.h1>
-          <motion.p key={lang + 'desc'} variants={fadeIn} className="text-[18px] lg:text-[22px] text-[#cbd5e1] mb-[48px] max-w-[700px] leading-[1.6] font-[300]">
+          <motion.p key={lang + 'desc'} variants={fadeIn} className="text-[19px] lg:text-[23px] text-[#cbd5e1] mb-[48px] max-w-[850px] leading-[1.6] font-[300]">
             {t.hero.desc}
           </motion.p>
-          <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
-            <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6d28d9] text-white font-[700] text-[15px] rounded-lg border border-[#a855f7] shadow-[0_0_30px_rgba(109,40,217,0.4)] transition-all hover:scale-105 uppercase tracking-widest">
+          
+          <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mb-16">
+            <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#6d28d9] text-white font-[800] text-[16px] rounded-lg border border-[#a855f7] shadow-[0_0_40px_rgba(109,40,217,0.5)] transition-all hover:scale-105 uppercase tracking-widest">
               {t.hero.cta} <ArrowRight className="w-5 h-5 ml-1" />
             </a>
+          </motion.div>
+
+          {/* Stats Bar */}
+          <motion.div variants={fadeIn} className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl border-t border-white/10 pt-12">
+            {[t.hero.stat1, t.hero.stat2, t.hero.stat3].map((stat, i) => (
+              <div key={i} className="flex items-center justify-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#22d3ee]"></div>
+                <span className="text-[13px] font-[700] uppercase tracking-widest text-[#cbd5e1]">{stat}</span>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
       </section>
@@ -263,13 +273,13 @@ export default function App() {
                  <Zap className="w-6 h-6 text-[#22d3ee]" />
                </div>
                <div className="absolute right-[8%] lg:right-[10%] top-[25%] -translate-y-1/2 z-20 w-[50px] h-[50px] bg-[#0a041f] border border-[#a855f7] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                 <Database className="w-5 h-5 text-[#a855f7]" />
+                 <Monitor className="w-5 h-5 text-[#a855f7]" />
                </div>
                <div className="absolute right-[8%] lg:right-[10%] top-1/2 -translate-y-1/2 z-20 w-[50px] h-[50px] bg-[#0a041f] border border-[#4c1d95] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(76,29,149,0.3)]">
                  <Settings className="w-5 h-5 text-[#a855f7]" />
                </div>
                <div className="absolute right-[8%] lg:right-[10%] top-[75%] -translate-y-1/2 z-20 w-[50px] h-[50px] bg-[#0a041f] border border-[#22d3ee] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-                 <MessageSquare className="w-5 h-5 text-[#22d3ee]" />
+                 <Layout className="w-5 h-5 text-[#22d3ee]" />
                </div>
             </motion.div>
          </div>
@@ -337,29 +347,14 @@ export default function App() {
         </div>
       </section>
 
-      {/* Use Cases Section */}
-      <section id="cases" className="py-24 lg:py-32 max-w-7xl mx-auto px-6 relative scroll-mt-20">
-        <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-[28px] sm:text-[36px] font-[800] mb-12 text-center text-white tracking-tight">
-          {t.casesTitle}
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-          {t.cases.map((useCase, i) => (
-             <motion.div 
-               key={i}
-               initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{
-                hidden: { opacity: 0, scale: 0.95 },
-                visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: i * 0.1 } }
-               }}
-               className="bg-[#0c051f] p-8 rounded-2xl border border border-[#4c1d95]/40 hover:border-[#a855f7] transition-all hover:-translate-y-2 shadow-lg hover:shadow-[0_15px_40px_rgba(168,85,247,0.2)]"
-             >
-                <div className="w-12 h-12 bg-[#a855f7]/10 rounded-lg flex items-center justify-center mb-6">
-                   <useCase.icon className="w-6 h-6 text-[#a855f7]" />
-                </div>
-                <h3 className="text-[20px] font-[700] text-white mb-4">{useCase.area}</h3>
-                <p className="text-[15px] text-[#cbd5e1] leading-[1.7]">{useCase.desc}</p>
-             </motion.div>
-          ))}
+      {/* Technology Stack / Trusted Tech Section */}
+      <section className="py-20 border-t border-white/5 bg-[#030612]/50">
+        <div className="max-w-7xl mx-auto px-6 overflow-hidden">
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+             {['React', 'TypeScript', 'Node.js', 'Firebase', 'Vite', 'Tailwind', 'Python', 'OpenAI'].map((tech) => (
+               <span key={tech} className="text-[12px] font-black uppercase tracking-[0.4em] text-white hover:text-[#22d3ee] cursor-default">{tech}</span>
+             ))}
+          </div>
         </div>
       </section>
 
@@ -432,7 +427,7 @@ export default function App() {
                   className="h-full flex flex-col items-center justify-center text-center py-12"
                 >
                   <div className="w-20 h-20 bg-[#22d3ee]/20 rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle className="w-10 h-10 text-[#22d3ee]" />
+                    <CheckCircle2 className="w-10 h-10 text-[#22d3ee]" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4">{t.form.success}</h3>
                 </motion.div>
