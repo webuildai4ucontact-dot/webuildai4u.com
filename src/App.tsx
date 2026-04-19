@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  ArrowRight, Settings, Cpu, Send, Globe, Database, 
+  ArrowRight, Settings, Cpu, Globe, Database, 
   Mail, Zap, Target, Search, RefreshCw, 
   Briefcase, Rocket, MapPin, Lightbulb, Menu, X, ArrowUp,
   Monitor, Layout, CheckCircle2, ShieldCheck
@@ -17,7 +17,6 @@ export default function App() {
   const [lang, setLang] = useState<'en'|'pt'>('pt');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const t = translations[lang];
 
   useEffect(() => {
@@ -36,35 +35,6 @@ export default function App() {
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmissionStatus('submitting');
-    
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/webuildai4u.contacts@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        setSubmissionStatus('success');
-        (e.target as HTMLFormElement).reset();
-        setTimeout(() => setSubmissionStatus('idle'), 5000);
-      } else {
-        setSubmissionStatus('error');
-      }
-    } catch (err) {
-      setSubmissionStatus('error');
-    }
   };
 
   return (
@@ -374,103 +344,45 @@ export default function App() {
         <div className="absolute top-0 right-[-20%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.08)_0%,transparent_70%)] z-0 pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          <div className="max-w-4xl mx-auto">
             
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="lg:col-span-1 flex flex-col justify-center space-y-10">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="flex flex-col items-center text-center space-y-12">
                <div>
-                  <h2 className="text-[32px] font-[800] text-white mb-4 tracking-tight">{t.contact.title}</h2>
-                  <p className="text-[#cbd5e1] leading-[1.6] mb-8">{t.contact.message}</p>
+                  <h2 className="text-[40px] md:text-[56px] font-[900] text-white mb-6 tracking-tight">{t.contact.title}</h2>
+                  <p className="text-[#cbd5e1] text-[18px] md:text-[20px] leading-[1.6] max-w-2xl mx-auto">{t.contact.message}</p>
                </div>
                
-               <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-[#0c051f] border border-[#4c1d95]/50 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(76,29,149,0.2)]">
-                        <Mail className="w-5 h-5 text-[#22d3ee]" />
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                  <div className="flex flex-col items-center gap-4 bg-[#0c051f]/50 p-8 rounded-2xl border border-[#4c1d95]/30">
+                     <div className="w-16 h-16 bg-[#0c051f] border border-[#4c1d95]/50 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(76,29,149,0.3)]">
+                        <Mail className="w-7 h-7 text-[#22d3ee]" />
                      </div>
-                     <div>
-                        <div className="text-[12px] text-[#cbd5e1] uppercase tracking-wider font-bold mb-1">Email</div>
-                        <div className="text-[15px] font-[500] text-white">webuildai4u.contacts@gmail.com</div>
-                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-[#0c051f] border border-[#4c1d95]/50 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(76,29,149,0.2)]">
-                        <MapPin className="w-5 h-5 text-[#a855f7]" />
-                     </div>
-                     <div>
-                        <div className="text-[12px] text-[#cbd5e1] uppercase tracking-wider font-bold mb-1">{t.contact.locationInfo}</div>
-                        <div className="text-[15px] font-[500] text-white">{t.contact.portugal}</div>
+                     <div className="text-center">
+                        <div className="text-[12px] text-[#22d3ee] uppercase tracking-[0.2em] font-black mb-1">Email</div>
+                        <div className="text-[17px] font-[700] text-white">webuildai4u.contacts@gmail.com</div>
                      </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-[#0c051f] border border-[#4c1d95]/50 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(76,29,149,0.2)]">
-                        <Globe className="w-5 h-5 text-[#22d3ee]" />
+                  <div className="flex flex-col items-center gap-4 bg-[#0c051f]/50 p-8 rounded-2xl border border-[#4c1d95]/30">
+                     <div className="w-16 h-16 bg-[#0c051f] border border-[#4c1d95]/50 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(76,29,149,0.3)]">
+                        <MapPin className="w-7 h-7 text-[#a855f7]" />
                      </div>
-                     <div>
-                        <div className="text-[12px] text-[#cbd5e1] uppercase tracking-wider font-bold mb-1">{t.contact.scopeInfo}</div>
-                        <div className="text-[15px] font-[500] text-white">{t.contact.europe}</div>
+                     <div className="text-center">
+                        <div className="text-[12px] text-[#a855f7] uppercase tracking-[0.2em] font-black mb-1">{t.contact.locationInfo}</div>
+                        <div className="text-[17px] font-[700] text-white">{t.contact.portugal}</div>
+                     </div>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-4 bg-[#0c051f]/50 p-8 rounded-2xl border border-[#4c1d95]/30">
+                     <div className="w-16 h-16 bg-[#0c051f] border border-[#4c1d95]/50 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(76,29,149,0.3)]">
+                        <Globe className="w-7 h-7 text-[#22d3ee]" />
+                     </div>
+                     <div className="text-center">
+                        <div className="text-[12px] text-[#22d3ee] uppercase tracking-[0.2em] font-black mb-1">{t.contact.scopeInfo}</div>
+                        <div className="text-[17px] font-[700] text-white">{t.contact.europe}</div>
                      </div>
                   </div>
                </div>
-            </motion.div>
-
-            <motion.div 
-              key={lang + 'form'}
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeIn}
-              className="lg:col-span-2 bg-[#030612]/90 backdrop-blur-md p-[40px] rounded-2xl border border-[#4c1d95]/60 shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
-            >
-              {submissionStatus === 'success' ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }} 
-                  animate={{ opacity: 1, scale: 1 }} 
-                  className="h-full flex flex-col items-center justify-center text-center py-12"
-                >
-                  <div className="w-20 h-20 bg-[#22d3ee]/20 rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle2 className="w-10 h-10 text-[#22d3ee]" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">{t.form.success}</h3>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-[20px]">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
-                    <div>
-                      <label className="text-[12px] uppercase tracking-widest text-[#cbd5e1] font-bold mb-2 block">{t.contact.name}</label>
-                      <input type="text" name="name" required placeholder="Ex: John Doe" className="w-full bg-[#0c051f] border border-[#4c1d95]/50 p-[16px] text-white text-[15px] rounded-lg outline-none focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] transition-all" />
-                    </div>
-                    <div>
-                      <label className="text-[12px] uppercase tracking-widest text-[#cbd5e1] font-bold mb-2 block">{t.contact.company}</label>
-                      <input type="text" name="company" placeholder="Ex: Tech Corp" className="w-full bg-[#0c051f] border border-[#4c1d95]/50 p-[16px] text-white text-[15px] rounded-lg outline-none focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] transition-all" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="text-[12px] uppercase tracking-widest text-[#cbd5e1] font-bold mb-2 block">{t.contact.email}</label>
-                    <input type="email" name="email" required placeholder="john@techcorp.com" className="w-full bg-[#0c051f] border border-[#4c1d95]/50 p-[16px] text-white text-[15px] rounded-lg outline-none focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] transition-all" />
-                  </div>
-                  <div>
-                    <label className="text-[12px] uppercase tracking-widest text-[#cbd5e1] font-bold mb-2 block">Mensagem</label>
-                    <textarea name="message" required placeholder="..." className="w-full h-[140px] resize-none bg-[#0c051f] border border-[#4c1d95]/50 p-[16px] text-white text-[15px] rounded-lg outline-none focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee] transition-all"></textarea>
-                  </div>
-                  
-                  {submissionStatus === 'error' && (
-                    <p className="text-red-400 text-sm font-bold">{t.form.error}</p>
-                  )}
-
-                  <button 
-                    type="submit" 
-                    disabled={submissionStatus === 'submitting'}
-                    className={`w-full bg-[#6d28d9] text-white border-none py-[18px] px-[24px] font-[800] uppercase mt-[16px] cursor-pointer transition-all hover:bg-[#5b21b6] hover:shadow-[0_0_20px_rgba(109,40,217,0.5)] rounded-lg flex justify-center items-center gap-3 tracking-widest text-[15px] ${submissionStatus === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
-                  >
-                    {submissionStatus === 'submitting' ? (
-                      <RefreshCw className="w-5 h-5 animate-spin" />
-                    ) : (
-                      <>
-                        {t.contact.send} <Send className="w-5 h-5 ml-2" />
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
             </motion.div>
           </div>
         </div>

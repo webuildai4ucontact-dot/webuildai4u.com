@@ -3,7 +3,6 @@ import { Monitor, Settings, Lightbulb, Search, Target, Cpu, RefreshCw, ShieldChe
 export const translations = {
   en: {
     nav: { about: "About", services: "Services", process: "Process", cases: "Results", pricing: "Pricing", contact: "Contact", lang: "PT" },
-    form: { success: "Message sent! Let's build your weapon.", error: "Technical error. Try again." },
     hero: {
       badge: "High-Performance Assets",
       titlePre: "A Website is Not Decoration. ",
@@ -38,11 +37,7 @@ export const translations = {
     },
     contact: {
       title: "Strategic Briefing",
-      name: "Decision Maker",
-      company: "Organization",
-      email: "Priority Email",
-      message: "Required outcomes...",
-      send: "Deploy Proposal",
+      message: "Ready to deploy your next digital asset? Connect with our operations center.",
       locationInfo: "Ops Center",
       scopeInfo: "Scale",
       portugal: "Lisbon",
@@ -54,7 +49,6 @@ export const translations = {
   },
   pt: {
     nav: { about: "Sobre", services: "Serviços", process: "Processo", cases: "Resultados", pricing: "Preços", contact: "Contacto", lang: "EN" },
-    form: { success: "Mensagem enviada! Vamos construir a sua arma.", error: "Erro técnico. Tente novamente." },
     hero: {
       badge: "Ativos de Alta Performance",
       titlePre: "Um Website Não é Decoração. ",
@@ -89,11 +83,7 @@ export const translations = {
     },
     contact: {
       title: "Briefing Estratégico",
-      name: "Decision Maker",
-      company: "Organização",
-      email: "Email Prioritário",
-      message: "Resultados pretendidos...",
-      send: "Enviar Proposta",
+      message: "Pronto para implementar o seu próximo ativo digital? Ligue-se ao nosso centro de operações.",
       locationInfo: "Centro de Ops",
       scopeInfo: "Escala",
       portugal: "Lisboa",
