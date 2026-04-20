@@ -6,10 +6,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  ArrowRight, Settings, Cpu, Globe, Database, 
-  Mail, Zap, Target, Search, RefreshCw, 
-  Briefcase, Rocket, MapPin, Lightbulb, Menu, X, ArrowUp,
-  Monitor, Layout, CheckCircle2, ShieldCheck
+  ArrowRight, Cpu, Globe, Mail, Zap, Target, Search, RefreshCw, 
+  MapPin, Menu, X, ArrowUp, Monitor, CheckCircle2, ShieldCheck,
+  Settings, Layout
 } from 'lucide-react';
 import { translations } from './lib/translations';
 
@@ -161,8 +160,8 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="pt-40 pb-20 px-6 max-w-7xl mx-auto relative min-h-[90vh] flex flex-col justify-center items-center text-center">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(76,29,149,0.2)_0%,transparent_70%)] z-0 pointer-events-none"></div>
-        <div className="absolute top-[40%] right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(34,211,238,0.08)_0%,transparent_70%)] z-0 pointer-events-none"></div>
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.3)_0%,transparent_70%)] z-0 pointer-events-none blur-[60px]"></div>
+        <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(34,211,238,0.1)_0%,transparent_70%)] z-0 pointer-events-none blur-[40px]"></div>
 
         <motion.div className="relative z-10 max-w-[1100px] flex flex-col items-center" initial="hidden" animate="visible" variants={staggerContainer}>
           <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#22d3ee]/30 bg-[#22d3ee]/10 text-[12px] font-bold uppercase tracking-widest text-[#22d3ee] mb-[32px]">
@@ -305,10 +304,9 @@ export default function App() {
                 }}
                 className="relative z-10 flex flex-col items-center text-center group"
               >
-                <div className="w-16 h-16 rounded-full bg-[#030612] border-2 border-[#a855f7] flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(168,85,247,0.3)] group-hover:scale-110 group-hover:border-[#22d3ee] transition-all duration-300">
-                   <step.icon className="w-7 h-7 text-[#22d3ee]" />
+                <div className="w-16 h-16 rounded-xl bg-[#0c051f] border border-[#a855f7]/40 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(168,85,247,0.15)] group-hover:scale-110 group-hover:border-[#22d3ee] group-hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-500">
+                   <step.icon className="w-8 h-8 text-[#22d3ee]" />
                 </div>
-                <div className="bg-[#22d3ee] text-[#030612] text-[12px] font-bold px-3 py-1 rounded-full mb-4">Passo {i + 1}</div>
                 <h3 className="text-[17px] font-[700] text-white mb-3">{step.title}</h3>
                 <p className="text-[14px] text-[#cbd5e1] leading-[1.6]">{step.desc}</p>
               </motion.div>
@@ -388,14 +386,40 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-[#4c1d95]/30 py-8 bg-[#030612] relative z-10">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3 opacity-60">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#22d3ee]"></div>
-              <span className="text-[13px] font-[500] uppercase tracking-widest text-white">WeBuildAI4u &copy; {new Date().getFullYear()}</span>
+        <footer className="border-t border-[#4c1d95]/30 py-12 bg-[#030612] relative z-10">
+          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <div className="flex items-center gap-3">
+                 <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <circle cx="50" cy="20" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
+                   <circle cx="20" cy="50" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
+                   <circle cx="80" cy="50" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
+                   <circle cx="50" cy="80" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
+                   <path d="M46 24 L24 46" stroke="#22d3ee" strokeWidth="1.5" />
+                   <path d="M54 24 L76 46" stroke="#a855f7" strokeWidth="1.5" />
+                   <path d="M24 54 L46 76" stroke="#22d3ee" strokeWidth="1.5" />
+                   <path d="M76 54 L54 76" stroke="#a855f7" strokeWidth="1.5" />
+                   <path d="M30 50 L70 50" stroke="#4c1d95" strokeWidth="1.5" strokeDasharray="4 4" />
+                   <circle cx="50" cy="4" r="2" fill="#22d3ee" />
+                   <circle cx="50" cy="96" r="2" fill="#a855f7" />
+                 </svg>
+                 <span className="text-[18px] font-black tracking-tighter">WeBuildAI4u</span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] text-[#cbd5e1]/40 tracking-widest font-bold uppercase">
+                <ShieldCheck className="w-3 h-3 text-[#22d3ee]" />
+                Zero-Trust Encrypted Environment
+              </div>
             </div>
-            <div className="text-[#a855f7]/60 font-[600] text-[12px] uppercase tracking-[0.2em]">
-              {t.footer.est} {new Date().getFullYear()}
+
+            <div className="flex flex-col items-center md:items-end gap-2 text-center md:text-right">
+              <p className="text-[#cbd5e1]/40 text-[11px] font-medium tracking-widest uppercase">
+                © {new Date().getFullYear()} WeBuildAI4u. {t.footer.est} 2024.
+              </p>
+              <div className="flex gap-6 text-[10px] text-[#cbd5e1]/30 font-bold uppercase tracking-widest">
+                <a href="#" className="hover:text-[#22d3ee] transition-colors">Privacy</a>
+                <a href="#" className="hover:text-[#22d3ee] transition-colors">Terms</a>
+                <a href="#" className="hover:text-[#22d3ee] transition-colors">Security</a>
+              </div>
             </div>
           </div>
         </footer>

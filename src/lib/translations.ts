@@ -1,4 +1,4 @@
-import { Monitor, Settings, Lightbulb, Search, Target, Cpu, RefreshCw, ShieldCheck, Briefcase, Rocket, Layout, Zap, CheckCircle2 } from 'lucide-react';
+import { Monitor, Search, Target, Cpu, RefreshCw, ShieldCheck, Zap } from 'lucide-react';
 
 export const translations = {
   en: {
@@ -7,29 +7,29 @@ export const translations = {
       badge: "High-Performance Assets",
       titlePre: "A Website is Not Decoration. ",
       titleHighlight: "It's Your Competitive Weapon.",
-      desc: "Stop losing conversions to mediocrity. We build ultra-secure, high-speed digital fortresses that transform 2% interest into 8%+ ROI through smart automation.",
+      desc: "Stop losing clients to outdated sites or the lack of them. We build ultra-secure digital fortresses to take your business to another level through smart automation.",
       cta: "Secure Your Weapon",
       stat1: "67% users judge you in <3s",
       stat2: "40% lost conversions",
       stat3: "8-12% Conversion Rate"
     },
     about: {
-      title: "The WeBuildAI4u Paradigm",
-      p1: "We don't build standard software. We architect high-performance digital engines. In a market full of noise, companies that fail are those with 'decoration' sites. Companies that win possess scalable, high-speed weapons.",
-      p2: "Our core is Web Engineering. Our differentiator is Zero-Trust Security. Our turbocharge is AI Automation. <b class='text-[#4338ca]'>We don't sell layouts; we sell market dominance through technical excellence.</b>"
+      title: "About Us",
+      p1: "We don't build common software. We believe that all companies, regardless of their size, deserve access to intelligent tools. We combine website creation with artificial intelligence-based automation to developed digital solutions tailored to the needs of each client. Our mission is to transform complex processes into simple and efficient systems.",
+      p2: "In a constantly evolving market, automation is the competitive advantage that separates companies that grow from those that fail. WeBuildAI4U exists to put this advantage at the service of your business through high-performance websites and intelligent systems that operate continuously and autonomously. We build for the future. <b class='text-[#4338ca]'>We don't sell layouts, we sell market dominance through technical excellence.</b>"
     },
-    servicesTitle: "Core Infrastructure",
+    servicesTitle: "Services",
     services: [
-      { title: "High-Conversion Web Dev", icon: Monitor, desc: "Ultra-fast, bespoke engineering focused on speed, conversion (8%+ target), and elite design." },
-      { title: "Zero-Trust Security", icon: ShieldCheck, desc: "Military-grade infrastructure with 99.9% uptime and encrypted brand governance." },
-      { title: "AI Turbo-Automation", icon: Zap, desc: "Scaling systems to handle heavy lifting, lead qualification, and automated workflows." }
+      { title: "High-Performance Web Development", icon: Monitor, desc: "We develop custom digital platforms optimized for speed, user experience, and conversion. Every project is built to consistently and measurably transform visitors into customers." },
+      { title: "Security & Reliability", icon: ShieldCheck, desc: "We ensure secure and stable digital infrastructures with SSL Certificate, 99.9% uptime, and continuous protection of your company's data and digital reputation." },
+      { title: "Intelligent Automation", icon: Zap, desc: "We implement AI-based automation systems that reduce manual intervention, optimize operational processes, and allow your company to scale without proportionally increasing resources." }
     ],
     processTitle: "The Deployment Flow",
     process: [
-      { title: "ROI Diagnosis", icon: Search, desc: "We map conversion leaks and define where your digital weapon needs sharpening." },
-      { title: "Elite Engineering", icon: Target, desc: "Full-stack development of your redundant, high-speed digital architecture." },
-      { title: "Systems Integration", icon: Cpu, desc: "Injecting custom AI and automation layers for synchronous operational scaling." },
-      { title: "Continuous Dominance", icon: RefreshCw, desc: "Resilience management and data-driven optimization to ensure peak ROI." }
+      { title: "Diagnosis & Analysis", icon: Search, desc: "Mapping processes and inefficiencies to define strategic goals and build a solid foundation." },
+      { title: "Elite Development", icon: Target, desc: "Crafting custom digital architectures focused on high performance, security, and scalability." },
+      { title: "Integration & AI", icon: Cpu, desc: "Injecting AI and automating workflows with your current tools for a seamless transition." },
+      { title: "ROI Optimization", icon: RefreshCw, desc: "Data-driven monitoring to ensure continuous improvement and maximum investment return." }
     ],
     ctaFinal: {
       title: "Ready to stop decorating and start dominating?",
@@ -53,36 +53,36 @@ export const translations = {
       badge: "Ativos de Alta Performance",
       titlePre: "Um Website Não é Decoração. ",
       titleHighlight: "É a Sua Arma Competitiva.",
-      desc: "Pare de perder conversões por mediocridade. Construímos fortalezas digitais ultra-seguras que transformam 2% de interesse em 8%+ ROI através de automação inteligente.",
+      desc: "Pare de perder clientes por sites desatualizados ou por falta deles. Construímos fortalezas digitais ultra-seguras para levar o seu negócio a outro nível através de automatização inteligente.",
       cta: "Garanta a sua Arma",
       stat1: "67% julgam em <3s",
       stat2: "40% conversões perdidas",
       stat3: "8-12% Taxa de Conversão"
     },
     about: {
-      title: "O Paradigma WeBuildAI4u",
-      p1: "Não construímos software comum. Arquitetamos motores digitais de alta performance. Num mercado cheio de ruído, as empresas que fracassam têm sites 'decorativos'. As que vencem possuem armas escaláveis e velozes.",
-      p2: "O nosso core é Engenharia Web. O nosso diferencial é Segurança Zero-Trust. A nossa turbocarga é Automação com IA. <b class='text-[#4338ca]'>Não vendemos layouts; vendemos domínio de mercado através de excelência técnica.</b>"
+      title: "Sobre Nós",
+      p1: "Não construímos softwares comuns. Acreditamos que todas as empresas, independentemente da sua dimensão, merecem acesso a ferramentas inteligentes. Combinamos criação de sites com automatização baseada em inteligência artificial para desenvolver soluções digitais adaptadas às necessidades de cada cliente. A nossa missão é transformar processos complexos em sistemas simples e eficientes.",
+      p2: "Num mercado em constante evolução, a automatização é a vantagem competitiva que separa as empresas que crescem das que fracassam. A WeBuildAI4U existe para colocar essa vantagem ao serviço do seu negócio através de websites de alta performance e sistemas inteligentes que operam de forma contínua e autónoma. Construímos para o futuro. <b class='text-[#4338ca]'>Não vendemos layouts, vendemos domínio de mercado através de excelência técnica.</b>"
     },
-    servicesTitle: "Infraestrutura Core",
+    servicesTitle: "Serviços",
     services: [
-      { title: "Web Dev de Alta Conversão", icon: Monitor, desc: "Engenharia personalizada focada em velocidade, conversão (alvo 8%+) e design de elite." },
-      { title: "Segurança Zero-Trust", icon: ShieldCheck, desc: "Infraestrutura de nível militar com 99.9% uptime e governança de marca encriptada." },
-      { title: "Turbo-Automação com IA", icon: Zap, desc: "Escalabilidade de sistemas para lidar com processos pesados e qualificação de leads automática." }
+      { title: "Desenvolvimento Web de Alta Performance", icon: Monitor, desc: "Desenvolvemos plataformas digitais personalizadas, otimizadas para velocidade, experiência do utilizador e conversão. Cada projeto é construído com o objetivo de transformar visitantes em clientes de forma consistente e mensurável." },
+      { title: "Segurança e Fiabilidade", icon: ShieldCheck, desc: "Garantimos infraestruturas digitais seguras e estáveis, com Certificado SSL, disponibilidade de 99,9% e proteção contínua dos dados e da reputação digital da sua empresa." },
+      { title: "Automatização Inteligente", icon: Zap, desc: "Implementamos sistemas de automatização baseados em inteligência artificial que reduzem a intervenção manual, otimizam processos operacionais e permitem que a sua empresa escale sem aumentar proporcionalmente os recursos." }
     ],
     processTitle: "Fluxo de Implementação",
     process: [
-      { title: "Diagnóstico de ROI", icon: Search, desc: "Mapeamos fugas de conversão e definimos onde a sua arma digital precisa de ser afiada." },
-      { title: "Engenharia de Elite", icon: Target, desc: "Desenvolvimento full-stack da sua arquitetura digital redundante e ultra-rápida." },
-      { title: "Integração de Sistemas", icon: Cpu, desc: "Injeção de camadas de IA e automação para escalabilidade operacional síncrona." },
-      { title: "Domínio Contínuo", icon: RefreshCw, desc: "Gestão de resiliência e otimização baseada em dados para garantir o ROI máximo." }
+      { title: "Diagnóstico e Análise", icon: Search, desc: "Mapeamos processos e ineficiências para traçar objetivos estratégicos e criar uma base sólida." },
+      { title: "Desenvolvimento Elite", icon: Target, desc: "Criamos arquiteturas digitais personalizadas com foco em performance, segurança e escala." },
+      { title: "Integração e IA", icon: Cpu, desc: "Injetamos IA e automatizamos fluxos com as suas ferramentas atuais para uma transição fluida." },
+      { title: "Otimização de ROI", icon: RefreshCw, desc: "Monitorizamos o desempenho para garantir evolução constante e ROI máximo." }
     ],
     ctaFinal: {
       title: "Pronto para parar de decorar e começar a dominar?",
       button: "Iniciar Implementação"
     },
     contact: {
-      title: "Briefing Estratégico",
+      title: "Contacte-nos",
       message: "Pronto para implementar o seu próximo ativo digital? Ligue-se ao nosso centro de operações.",
       locationInfo: "Centro de Ops",
       scopeInfo: "Escala",
