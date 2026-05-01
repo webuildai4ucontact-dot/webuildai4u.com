@@ -11,11 +11,13 @@ import {
   Settings, Layout
 } from 'lucide-react';
 import { translations } from './lib/translations';
+import { TermsPage } from './TermsPage';
 
 export default function App() {
   const [lang, setLang] = useState<'en'|'pt'>('pt');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'main' | 'terms'>('main');
   const t = translations[lang];
 
   useEffect(() => {
@@ -35,6 +37,10 @@ export default function App() {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
   };
+
+  if (currentPage === 'terms') {
+    return <TermsPage onBack={() => setCurrentPage('main')} lang={lang} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#030612] text-white font-sans relative overflow-x-hidden selection:bg-[#22d3ee] selection:text-black">
@@ -417,7 +423,7 @@ export default function App() {
               </p>
               <div className="flex gap-6 text-[10px] text-[#cbd5e1]/30 font-bold uppercase tracking-widest">
                 <a href="#" className="hover:text-[#22d3ee] transition-colors">Privacy</a>
-                <a href="#" className="hover:text-[#22d3ee] transition-colors">Terms</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="hover:text-[#22d3ee] transition-colors cursor-pointer">Terms</a>
                 <a href="#" className="hover:text-[#22d3ee] transition-colors">Security</a>
               </div>
             </div>
