@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  ArrowRight, Cpu, Globe, Mail, Zap, Target, Search, RefreshCw, 
+  ArrowRight, Globe, Mail, Zap, 
   MapPin, Menu, X, ArrowUp, Monitor, CheckCircle2, ShieldCheck,
   Settings, Layout
 } from 'lucide-react';
@@ -39,18 +39,20 @@ export default function App() {
   };
 
   if (currentPage === 'terms') {
-    return <TermsPage onBack={() => setCurrentPage('main')} lang={lang} />;
+    return <TermsPage onBack={() => setCurrentPage('main')} lang={lang} setLang={setLang} />;
   }
 
   return (
     <div className="min-h-screen bg-[#030612] text-white font-sans relative overflow-x-hidden selection:bg-[#22d3ee] selection:text-black">
       
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes flow {
-          to { stroke-dashoffset: -20; }
-        }
-        .anim-line {
-          animation: flow 1s linear infinite;
+        @media (prefers-reduced-motion: no-preference) {
+          @keyframes flow {
+            to { stroke-dashoffset: -20; }
+          }
+          .anim-line {
+            animation: flow 1s linear infinite;
+          }
         }
         .grain {
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -62,9 +64,9 @@ export default function App() {
       <div className="fixed inset-0 pointer-events-none z-[100] grain"></div>
 
       {/* Navigation */}
-      <nav className="fixed w-full top-0 z-[100] bg-[#030612]/90 backdrop-blur-xl border-b border-[#4c1d95]/30 transition-all duration-500">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="flex flex-col items-center justify-center group">
+      <header className="fixed w-full top-0 z-[100] bg-[#030612]/90 backdrop-blur-xl border-b border-[#4c1d95]/30 transition-all duration-500">
+        <nav aria-label="Navegação Principal" className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <a href="#" className="flex flex-col items-center justify-center group" aria-label="WeBuildAI4u Home">
             {/* Logo */}
             <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-0.5 group-hover:rotate-[15deg] transition-transform duration-500">
               <circle cx="50" cy="20" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
@@ -88,10 +90,10 @@ export default function App() {
 
           <div className="flex items-center gap-6">
             <div className="hidden lg:flex gap-8 text-[12px] font-[700] text-[#cbd5e1] uppercase tracking-[0.2em]">
-              <a href="#about" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.about}</a>
-              <a href="#services" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.services}</a>
-              <a href="#process" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.process}</a>
-              <a href="#contact" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#22d3ee] hover:after:w-full after:transition-all">{t.nav.contact}</a>
+              <a href="#about" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.about}</a>
+              <a href="#services" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.services}</a>
+              <a href="#process" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.process}</a>
+              <a href="#contact" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.contact}</a>
             </div>
             
             <div className="flex items-center gap-4">
@@ -127,12 +129,13 @@ export default function App() {
               <button 
                 className="lg:hidden text-white p-2"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>
-        </div>
+        </nav>
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
@@ -162,59 +165,60 @@ export default function App() {
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 max-w-7xl mx-auto relative min-h-[90vh] flex flex-col justify-center items-center text-center">
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.3)_0%,transparent_70%)] z-0 pointer-events-none blur-[60px]"></div>
-        <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(34,211,238,0.1)_0%,transparent_70%)] z-0 pointer-events-none blur-[40px]"></div>
+      <main>
+        {/* Hero Section */}
+        <section aria-label="Apresentação Geral e Destaques" className="pt-40 pb-20 px-6 max-w-7xl mx-auto relative min-h-[90vh] flex flex-col justify-center items-center text-center">
+          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.3)_0%,transparent_70%)] z-0 pointer-events-none blur-[60px]"></div>
+          <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(34,211,238,0.1)_0%,transparent_70%)] z-0 pointer-events-none blur-[40px]"></div>
 
-        <motion.div className="relative z-10 max-w-[1100px] flex flex-col items-center" initial="hidden" animate="visible" variants={staggerContainer}>
-          <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#22d3ee]/30 bg-[#22d3ee]/10 text-[12px] font-bold uppercase tracking-widest text-[#22d3ee] mb-[32px]">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            {t.hero.badge}
-          </motion.div>
-          <motion.h1 key={lang} variants={fadeIn} className="text-[44px] sm:text-[64px] lg:text-[86px] leading-[1.0] font-[900] mb-[24px] tracking-[-0.04em] text-white">
-            {t.hero.titlePre} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22d3ee] to-[#a855f7]">{t.hero.titleHighlight}</span>
-          </motion.h1>
-          <motion.p key={lang + 'desc'} variants={fadeIn} className="text-[19px] lg:text-[23px] text-[#cbd5e1] mb-[48px] max-w-[850px] leading-[1.6] font-[300]">
-            {t.hero.desc}
-          </motion.p>
-          
-          <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mb-16">
-            <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#6d28d9] text-white font-[800] text-[16px] rounded-lg border border-[#a855f7] shadow-[0_0_40px_rgba(109,40,217,0.5)] transition-all hover:scale-105 uppercase tracking-widest">
-              {t.hero.cta} <ArrowRight className="w-5 h-5 ml-1" />
-            </a>
-          </motion.div>
-
-          {/* Stats Bar */}
-          <motion.div variants={fadeIn} className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl border-t border-white/10 pt-12">
-            {[t.hero.stat1, t.hero.stat2, t.hero.stat3].map((stat, i) => (
-              <div key={i} className="flex items-center justify-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#22d3ee]"></div>
-                <span className="text-[13px] font-[700] uppercase tracking-widest text-[#cbd5e1]">{stat}</span>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-24 lg:py-32 bg-[#09041a] border-y border-[#4c1d95]/30 relative scroll-mt-20">
-         <div className="absolute bottom-[-100px] left-[10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(34,211,238,0.06)_0%,transparent_70%)] z-0 pointer-events-none"></div>
-
-         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="order-2 lg:order-1">
-               <motion.h2 variants={fadeIn} className="text-[#22d3ee] font-bold text-[14px] lg:text-[16px] uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#a855f7] shadow-[0_0_15px_rgba(168,85,247,0.7)]"></div>
-                  {t.about.title}
-               </motion.h2>
-               <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-[#f8fafc] leading-[1.7] mb-8 font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p1 }} />
-               <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-[#cbd5e1] leading-[1.7] font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p2 }} />
+          <motion.div className="relative z-10 max-w-[1100px] flex flex-col items-center will-change-transform" initial="hidden" animate="visible" variants={staggerContainer}>
+            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#22d3ee]/30 bg-[#22d3ee]/10 text-[12px] font-bold uppercase tracking-widest text-[#22d3ee] mb-[32px]">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              {t.hero.badge}
+            </motion.div>
+            <motion.h1 key={lang} variants={fadeIn} className="text-[44px] sm:text-[64px] lg:text-[86px] leading-[1.0] font-[900] mb-[24px] tracking-[-0.04em] text-white">
+              {t.hero.titlePre} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22d3ee] to-[#a855f7]">{t.hero.titleHighlight}</span>
+            </motion.h1>
+            <motion.p key={lang + 'desc'} variants={fadeIn} className="text-[19px] lg:text-[23px] text-[#cbd5e1] mb-[48px] max-w-[850px] leading-[1.6] font-[300]">
+              {t.hero.desc}
+            </motion.p>
+            
+            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mb-16">
+              <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#6d28d9] text-white font-[800] text-[16px] rounded-lg border border-[#a855f7] shadow-[0_0_40px_rgba(109,40,217,0.5)] transition-all hover:scale-105 uppercase tracking-widest hover:will-change-transform">
+                {t.hero.cta} <ArrowRight className="w-5 h-5 ml-1" />
+              </a>
             </motion.div>
 
-             {/* Workflow Graphic */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeIn} className="order-1 lg:order-2 relative w-full h-[400px] lg:h-[550px] bg-[#0c051f] rounded-2xl border border-[#4c1d95]/50 shadow-[0_0_60px_rgba(76,29,149,0.15)] overflow-hidden flex items-center justify-center group">
+            {/* Stats Bar */}
+            <motion.div variants={fadeIn} className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl border-t border-white/10 pt-12">
+              {[t.hero.stat1, t.hero.stat2, t.hero.stat3].map((stat, i) => (
+                <div key={i} className="flex items-center justify-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#22d3ee]"></div>
+                  <span className="text-[13px] font-[700] uppercase tracking-widest text-[#cbd5e1]">{stat}</span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" aria-label="Sobre a WeBuildAI4u" className="py-24 lg:py-32 bg-[#09041a] border-y border-[#4c1d95]/30 relative scroll-mt-20">
+           <div className="absolute bottom-[-100px] left-[10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(34,211,238,0.06)_0%,transparent_70%)] z-0 pointer-events-none"></div>
+
+           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="order-2 lg:order-1 will-change-transform">
+                 <motion.h2 variants={fadeIn} className="text-[#22d3ee] font-bold text-[14px] lg:text-[16px] uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#a855f7] shadow-[0_0_15px_rgba(168,85,247,0.7)]"></div>
+                    {t.about.title}
+                 </motion.h2>
+                 <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-[#f8fafc] leading-[1.7] mb-8 font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p1 }} />
+                 <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-[#cbd5e1] leading-[1.7] font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p2 }} />
+              </motion.div>
+
+              {/* Workflow Graphic */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeIn} className="order-1 lg:order-2 relative w-full h-[400px] lg:h-[550px] bg-[#0c051f] rounded-2xl border border-[#4c1d95]/50 shadow-[0_0_60px_rgba(76,29,149,0.15)] overflow-hidden flex items-center justify-center group will-change-transform" role="img" aria-label="Visualização do Fluxo de Trabalho de Automação de Inteligência Artificial">
                <div className="absolute inset-0 bg-[linear-gradient(to_right,#4c1d951a_1px,transparent_1px),linear-gradient(to_bottom,#4c1d951a_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-50"></div>
                <div className="absolute top-[20%] left-[20%] w-[180px] h-[180px] bg-[#22d3ee]/10 rounded-full blur-[90px] animate-pulse"></div>
                <div className="absolute bottom-[20%] right-[20%] w-[180px] h-[180px] bg-[#a855f7]/10 rounded-full blur-[90px] animate-pulse" style={{ animationDelay: '1.5s' }}></div>
@@ -261,7 +265,7 @@ export default function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 lg:py-32 max-w-7xl mx-auto px-6 relative scroll-mt-20">
+      <section id="services" aria-label="Nossos Serviços de Elite" className="py-24 lg:py-32 max-w-7xl mx-auto px-6 relative scroll-mt-20">
         <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-[28px] sm:text-[36px] font-[800] mb-12 text-center text-white tracking-tight">
           {t.servicesTitle}
         </motion.h2>
@@ -269,12 +273,12 @@ export default function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {t.services.map((svc, i) => (
             <motion.div 
-              key={i + lang} 
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.1 } }
-              }}
-              className={`bg-[#0c051f]/80 backdrop-blur-sm p-[32px] rounded-xl border border-[#4c1d95]/40 hover:border-[#22d3ee]/60 hover:bg-[#0c051f] transition-all duration-300 hover:-translate-y-1 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.15)] group relative overflow-hidden ${i === 3 ? 'lg:col-span-1 lg:ml-auto' : ''} ${i === 4 ? 'lg:col-span-2' : ''}`}
+               key={i + lang} 
+               initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{
+                 hidden: { opacity: 0, y: 20 },
+                 visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.1 } }
+               }}
+               className={`bg-[#0c051f]/80 backdrop-blur-sm p-[32px] rounded-xl border border-[#4c1d95]/40 hover:border-[#22d3ee]/60 hover:bg-[#0c051f] transition-all duration-300 hover:-translate-y-1 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.15)] group relative overflow-hidden ${i === 3 ? 'lg:col-span-1 lg:ml-auto' : ''} ${i === 4 ? 'lg:col-span-2' : ''}`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#6d28d9]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
@@ -291,7 +295,7 @@ export default function App() {
       </section>
 
       {/* How it Works Section */}
-      <section id="process" className="py-24 lg:py-32 bg-[#09041a] border-y border-[#4c1d95]/30 relative scroll-mt-20">
+      <section id="process" aria-label="Como Trabalhamos" className="py-24 lg:py-32 bg-[#09041a] border-y border-[#4c1d95]/30 relative scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-[28px] sm:text-[36px] font-[800] mb-20 text-center text-white tracking-tight">
             {t.processTitle}
@@ -322,7 +326,7 @@ export default function App() {
       </section>
 
       {/* Technology Stack / Trusted Tech Section */}
-      <section className="py-20 border-t border-white/5 bg-[#030612]/50">
+      <section aria-label="Tecnologias Utilizadas" className="py-20 border-t border-white/5 bg-[#030612]/50">
         <div className="max-w-7xl mx-auto px-6 overflow-hidden">
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
              {['React', 'TypeScript', 'Node.js', 'Firebase', 'Vite', 'Tailwind', 'Python', 'OpenAI'].map((tech) => (
@@ -333,18 +337,18 @@ export default function App() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 max-w-5xl mx-auto px-6 text-center">
+      <section aria-label="Apelo à Ação para Contacto" className="py-24 max-w-5xl mx-auto px-6 text-center">
          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="bg-gradient-to-br from-[#1c0b3b] to-[#0c051f] border border-[#a855f7]/50 rounded-3xl p-12 lg:p-20 shadow-[0_20px_60px_rgba(109,40,217,0.3)] relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.15),transparent_50%)]"></div>
             <h2 className="text-[32px] sm:text-[40px] font-[800] text-white mb-8 relative z-10 max-w-2xl mx-auto">{t.ctaFinal.title}</h2>
-            <a href="#contact" className="relative z-10 inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#22d3ee] text-[#030612] font-[800] text-[16px] rounded-lg transition-all hover:bg-white hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-widest">
+            <a href="#contact" className="relative z-10 inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#22d3ee] text-[#030612] font-[800] text-[16px] rounded-lg transition-all hover:bg-white hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-widest hover:will-change-transform">
               {t.ctaFinal.button} <ArrowRight className="w-5 h-5 ml-1" />
             </a>
          </motion.div>
       </section>
 
       {/* Contact Section & Footer */}
-      <section id="contact" className="pt-24 bg-[#09041a] border-t border-[#4c1d95]/40 scroll-mt-20 relative">
+      <section id="contact" aria-label="Contacto e Localização" className="pt-24 bg-[#09041a] border-t border-[#4c1d95]/40 scroll-mt-20 relative">
         <div className="absolute top-0 right-[-20%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.08)_0%,transparent_70%)] z-0 pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
@@ -390,61 +394,63 @@ export default function App() {
             </motion.div>
           </div>
         </div>
+      </section>
+      </main>
 
-        {/* Footer */}
-        <footer className="border-t border-[#4c1d95]/30 py-12 bg-[#030612] relative z-10">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex flex-col items-center md:items-start gap-4">
-              <div className="flex items-center gap-3">
-                 <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                   <circle cx="50" cy="20" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
-                   <circle cx="20" cy="50" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
-                   <circle cx="80" cy="50" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
-                   <circle cx="50" cy="80" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
-                   <path d="M46 24 L24 46" stroke="#22d3ee" strokeWidth="1.5" />
-                   <path d="M54 24 L76 46" stroke="#a855f7" strokeWidth="1.5" />
-                   <path d="M24 54 L46 76" stroke="#22d3ee" strokeWidth="1.5" />
-                   <path d="M76 54 L54 76" stroke="#a855f7" strokeWidth="1.5" />
-                   <path d="M30 50 L70 50" stroke="#4c1d95" strokeWidth="1.5" strokeDasharray="4 4" />
-                   <circle cx="50" cy="4" r="2" fill="#22d3ee" />
-                   <circle cx="50" cy="96" r="2" fill="#a855f7" />
-                 </svg>
-                 <span className="text-[18px] font-black tracking-tighter">WeBuildAI4u</span>
-              </div>
-              <div className="flex items-center gap-2 text-[10px] text-[#cbd5e1]/40 tracking-widest font-bold uppercase">
-                <ShieldCheck className="w-3 h-3 text-[#22d3ee]" />
-                Zero-Trust Encrypted Environment
-              </div>
+      {/* Footer */}
+      <footer className="border-t border-[#4c1d95]/30 py-12 bg-[#030612] relative z-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <div className="flex items-center gap-3">
+               <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                 <circle cx="50" cy="20" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
+                 <circle cx="20" cy="50" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
+                 <circle cx="80" cy="50" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
+                 <circle cx="50" cy="80" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
+                 <path d="M46 24 L24 46" stroke="#22d3ee" strokeWidth="1.5" />
+                 <path d="M54 24 L76 46" stroke="#a855f7" strokeWidth="1.5" />
+                 <path d="M24 54 L46 76" stroke="#22d3ee" strokeWidth="1.5" />
+                 <path d="M76 54 L54 76" stroke="#a855f7" strokeWidth="1.5" />
+                 <path d="M30 50 L70 50" stroke="#4c1d95" strokeWidth="1.5" strokeDasharray="4 4" />
+                 <circle cx="50" cy="4" r="2" fill="#22d3ee" />
+                 <circle cx="50" cy="96" r="2" fill="#a855f7" />
+               </svg>
+               <span className="text-[18px] font-black tracking-tighter">WeBuildAI4u</span>
             </div>
-
-            <div className="flex flex-col items-center md:items-end gap-2 text-center md:text-right">
-              <p className="text-[#cbd5e1]/40 text-[11px] font-medium tracking-widest uppercase">
-                © {new Date().getFullYear()} WeBuildAI4u. {t.footer.est} 2024.
-              </p>
-              <div className="flex gap-6 text-[10px] text-[#cbd5e1]/30 font-bold uppercase tracking-widest">
-                <a href="#" className="hover:text-[#22d3ee] transition-colors">Privacy</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="hover:text-[#22d3ee] transition-colors cursor-pointer">Terms</a>
-                <a href="#" className="hover:text-[#22d3ee] transition-colors">Security</a>
-              </div>
+            <div className="flex items-center gap-2 text-[10px] text-slate-350 tracking-widest font-extrabold uppercase">
+              <ShieldCheck className="w-3 h-3 text-[#22d3ee]" />
+              Zero-Trust Encrypted Environment
             </div>
           </div>
-        </footer>
 
-        {/* Scroll to Top */}
-        <AnimatePresence>
-          {showScrollTop && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="fixed bottom-8 right-8 z-[100] w-12 h-12 bg-[#22d3ee] text-black rounded-full shadow-lg shadow-[#22d3ee]/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
-            >
-              <ArrowUp className="w-6 h-6" />
-            </motion.button>
-          )}
-        </AnimatePresence>
-      </section>
+          <div className="flex flex-col items-center md:items-end gap-2 text-center md:text-right">
+            <p className="text-slate-350 text-[11px] font-bold tracking-widest uppercase">
+              © {new Date().getFullYear()} WeBuildAI4u. {t.footer.est} 2024.
+            </p>
+            <div className="flex gap-6 text-[10px] text-slate-300 font-extrabold uppercase tracking-widest">
+              <a href="#" className="hover:text-[#22d3ee] transition-colors">Privacy</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="hover:text-[#22d3ee] transition-colors cursor-pointer">Terms</a>
+              <a href="#" className="hover:text-[#22d3ee] transition-colors">Security</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Scroll to Top */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-8 right-8 z-[100] w-12 h-12 bg-[#22d3ee] text-black rounded-full shadow-lg shadow-[#22d3ee]/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
+            aria-label="Voltar ao Topo"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
     </div>
   );
