@@ -19,16 +19,8 @@ export default defineConfig(({mode}) => {
       treeshake: true,
       rollupOptions: {
         output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('motion') || id.includes('framer-motion')) {
-                return 'motion';
-              }
-              if (id.includes('lucide')) {
-                return 'icons';
-              }
-              return 'vendor';
-            }
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
           },
         },
       },

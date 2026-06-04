@@ -11,13 +11,15 @@ import {
   Settings, Layout
 } from 'lucide-react';
 import { translations } from './lib/translations';
-import { TermsPage } from './TermsPage';
+
+const TermsPage = React.lazy(() => import('./TermsPage').then(module => ({ default: module.TermsPage })));
 
 export default function App() {
   const [lang, setLang] = useState<'en'|'pt'>('pt');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentPage, setCurrentPage] = useState<'main' | 'terms'>('main');
+  const [isMobile, setIsMobile] = useState(false);
   const t = translations[lang];
 
   useEffect(() => {
@@ -28,18 +30,33 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const animationDurationMultiplier = isMobile ? 0.5 : 1.0;
+
   const fadeIn = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7 * animationDurationMultiplier, ease: "easeOut" } }
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 * animationDurationMultiplier } }
   };
 
   if (currentPage === 'terms') {
-    return <TermsPage onBack={() => setCurrentPage('main')} lang={lang} setLang={setLang} />;
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#030612]" />}>
+        <TermsPage onBack={() => setCurrentPage('main')} lang={lang} setLang={setLang} />
+      </React.Suspense>
+    );
   }
 
   return (
@@ -82,14 +99,14 @@ export default function App() {
               <circle cx="50" cy="96" r="2" fill="#a855f7" />
             </svg>
             <div className="flex flex-col items-center">
-              <span className="text-[8px] text-[#cbd5e1] tracking-[0.2em] leading-none mb-[1px]">WE</span>
+              <span className="text-[8px] text-slate-100 tracking-[0.2em] leading-none mb-[1px]">WE</span>
               <span className="text-[14px] font-[900] text-[#22d3ee] tracking-[0.14em] leading-none" style={{ textShadow: '0 0 15px rgba(34,211,238,0.5)' }}>BUILD</span>
-              <span className="text-[8px] text-[#cbd5e1] tracking-[0.3em] leading-none mt-[2px]">AI 4 U</span>
+              <span className="text-[8px] text-slate-100 tracking-[0.3em] leading-none mt-[2px]">AI 4 U</span>
             </div>
           </a>
 
           <div className="flex items-center gap-6">
-            <div className="hidden lg:flex gap-8 text-[12px] font-[700] text-[#cbd5e1] uppercase tracking-[0.2em]">
+            <div className="hidden lg:flex gap-8 text-[12px] font-[700] text-slate-100 uppercase tracking-[0.2em]">
               <a href="#about" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.about}</a>
               <a href="#services" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.services}</a>
               <a href="#process" className="hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-[#22d3ee] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform">{t.nav.process}</a>
@@ -100,7 +117,7 @@ export default function App() {
               <div className="flex items-center bg-[#100726]/30 p-1 rounded-full border border-white/5 relative overflow-hidden">
                 <button 
                   onClick={() => setLang('pt')}
-                  className={`relative z-10 px-4 py-1.5 rounded-full text-[10px] font-[900] tracking-widest transition-all duration-500 ${lang === 'pt' ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
+                  className={`relative z-10 px-4 py-1.5 rounded-full text-[10px] font-[900] tracking-widest transition-colors duration-300 ${lang === 'pt' ? 'text-white' : 'text-slate-300 hover:text-white'}`}
                 >
                   {lang === 'pt' && (
                     <motion.div 
@@ -113,7 +130,7 @@ export default function App() {
                 </button>
                 <button 
                   onClick={() => setLang('en')}
-                  className={`relative z-10 px-4 py-1.5 rounded-full text-[10px] font-[900] tracking-widest transition-all duration-500 ${lang === 'en' ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
+                  className={`relative z-10 px-4 py-1.5 rounded-full text-[10px] font-[900] tracking-widest transition-colors duration-300 ${lang === 'en' ? 'text-white' : 'text-slate-300 hover:text-white'}`}
                 >
                   {lang === 'en' && (
                     <motion.div 
@@ -181,12 +198,12 @@ export default function App() {
             <motion.h1 key={lang} variants={fadeIn} className="text-[44px] sm:text-[64px] lg:text-[86px] leading-[1.0] font-[900] mb-[24px] tracking-[-0.04em] text-white">
               {t.hero.titlePre} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22d3ee] to-[#a855f7]">{t.hero.titleHighlight}</span>
             </motion.h1>
-            <motion.p key={lang + 'desc'} variants={fadeIn} className="text-[19px] lg:text-[23px] text-[#cbd5e1] mb-[48px] max-w-[850px] leading-[1.6] font-[300]">
+            <motion.p key={lang + 'desc'} variants={fadeIn} className="text-[19px] lg:text-[23px] text-slate-100 mb-[48px] max-w-[850px] leading-[1.6] font-[400]">
               {t.hero.desc}
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mb-16">
-              <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#6d28d9] text-white font-[800] text-[16px] rounded-lg border border-[#a855f7] shadow-[0_0_40px_rgba(109,40,217,0.5)] transition-all hover:scale-105 uppercase tracking-widest hover:will-change-transform">
+              <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#6d28d9] text-white font-[800] text-[16px] rounded-lg border border-[#a855f7] shadow-[0_0_40px_rgba(109,40,217,0.5)] transition-transform duration-300 hover:scale-105 uppercase tracking-widest hover:will-change-transform">
                 {t.hero.cta} <ArrowRight className="w-5 h-5 ml-1" />
               </a>
             </motion.div>
@@ -196,7 +213,7 @@ export default function App() {
               {[t.hero.stat1, t.hero.stat2, t.hero.stat3].map((stat, i) => (
                 <div key={i} className="flex items-center justify-center gap-3">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#22d3ee]"></div>
-                  <span className="text-[13px] font-[700] uppercase tracking-widest text-[#cbd5e1]">{stat}</span>
+                  <span className="text-[13px] font-[700] uppercase tracking-widest text-slate-200">{stat}</span>
                 </div>
               ))}
             </motion.div>
@@ -213,8 +230,8 @@ export default function App() {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#a855f7] shadow-[0_0_15px_rgba(168,85,247,0.7)]"></div>
                     {t.about.title}
                  </motion.h2>
-                 <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-[#f8fafc] leading-[1.7] mb-8 font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p1 }} />
-                 <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-[#cbd5e1] leading-[1.7] font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p2 }} />
+                 <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-slate-100 leading-[1.7] mb-8 font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p1 }} />
+                 <motion.p variants={fadeIn} className="text-[17px] sm:text-[19px] lg:text-[21px] text-slate-200 leading-[1.7] font-[400]" dangerouslySetInnerHTML={{ __html: t.about.p2 }} />
               </motion.div>
 
               {/* Workflow Graphic */}
@@ -288,7 +305,7 @@ export default function App() {
                 </div>
               </div>
               <h3 className="text-[20px] text-white tracking-widest font-black mb-4 uppercase">{svc.title}</h3>
-              <p className="text-[15px] text-[#cbd5e1] leading-[1.8] opacity-80 relative z-10 font-[300] tracking-wide">{svc.desc}</p>
+              <p className="text-[15px] text-slate-100 leading-[1.8] relative z-10 font-[400] tracking-wide">{svc.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -318,7 +335,7 @@ export default function App() {
                    <step.icon className="w-8 h-8 text-[#22d3ee]" />
                 </div>
                 <h3 className="text-[17px] font-[700] text-white mb-3">{step.title}</h3>
-                <p className="text-[14px] text-[#cbd5e1] leading-[1.6]">{step.desc}</p>
+                <p className="text-[14px] text-slate-200 leading-[1.6] font-[400]">{step.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -328,9 +345,9 @@ export default function App() {
       {/* Technology Stack / Trusted Tech Section */}
       <section aria-label="Tecnologias Utilizadas" className="py-20 border-t border-white/5 bg-[#030612]/50">
         <div className="max-w-7xl mx-auto px-6 overflow-hidden">
-          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-80 grayscale hover:grayscale-0 transition-opacity duration-300">
              {['React', 'TypeScript', 'Node.js', 'Firebase', 'Vite', 'Tailwind', 'Python', 'OpenAI'].map((tech) => (
-               <span key={tech} className="text-[12px] font-black uppercase tracking-[0.4em] text-white hover:text-[#22d3ee] cursor-default">{tech}</span>
+               <span key={tech} className="text-[12px] font-black uppercase tracking-[0.4em] text-white hover:text-[#22d3ee] cursor-default transition-colors duration-300">{tech}</span>
              ))}
           </div>
         </div>
@@ -357,7 +374,7 @@ export default function App() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="flex flex-col items-center text-center space-y-12">
                <div>
                   <h2 className="text-[40px] md:text-[56px] font-[900] text-white mb-6 tracking-tight">{t.contact.title}</h2>
-                  <p className="text-[#cbd5e1] text-[18px] md:text-[20px] leading-[1.6] max-w-2xl mx-auto">{t.contact.message}</p>
+                  <p className="text-slate-100 text-[18px] md:text-[20px] leading-[1.6] max-w-2xl mx-auto">{t.contact.message}</p>
                </div>
                
                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
@@ -417,17 +434,17 @@ export default function App() {
                </svg>
                <span className="text-[18px] font-black tracking-tighter">WeBuildAI4u</span>
             </div>
-            <div className="flex items-center gap-2 text-[10px] text-slate-350 tracking-widest font-extrabold uppercase">
+            <div className="flex items-center gap-2 text-[10px] text-slate-200 tracking-widest font-extrabold uppercase">
               <ShieldCheck className="w-3 h-3 text-[#22d3ee]" />
               Zero-Trust Encrypted Environment
             </div>
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-2 text-center md:text-right">
-            <p className="text-slate-350 text-[11px] font-bold tracking-widest uppercase">
+            <p className="text-slate-200 text-[11px] font-bold tracking-widest uppercase">
               © {new Date().getFullYear()} WeBuildAI4u. {t.footer.est} 2024.
             </p>
-            <div className="flex gap-6 text-[10px] text-slate-300 font-extrabold uppercase tracking-widest">
+            <div className="flex gap-6 text-[10px] text-slate-100 font-extrabold uppercase tracking-widest">
               <a href="#" className="hover:text-[#22d3ee] transition-colors">Privacy</a>
               <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="hover:text-[#22d3ee] transition-colors cursor-pointer">Terms</a>
               <a href="#" className="hover:text-[#22d3ee] transition-colors">Security</a>

@@ -49,15 +49,15 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
       renderPt: () => (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-[#100726]/40 border border-white/10 p-5 rounded-xl">
-            <span className="text-slate-400 text-xs uppercase tracking-wider block font-bold">Nome Legal</span>
+            <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Nome Legal</span>
             <p className="text-white text-base font-bold mt-1">WeBuildAI4u</p>
           </div>
           <div className="bg-[#100726]/40 border border-white/10 p-5 rounded-xl">
-            <span className="text-slate-400 text-xs uppercase tracking-wider block font-bold">Sede Virtual</span>
+            <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Sede Virtual</span>
             <p className="text-white text-base font-bold mt-1">Lisboa, Portugal</p>
           </div>
           <div className="bg-[#100726]/40 border border-white/10 p-5 rounded-xl">
-            <span className="text-slate-400 text-xs uppercase tracking-wider block font-bold">Email de Contacto</span>
+            <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Email de Contacto</span>
             <a href="mailto:webuildai4u.contact@gmail.com" className="block text-white hover:text-[#22d3ee] transition-colors text-base font-bold mt-1 break-all">
               webuildai4u.contact@gmail.com
             </a>
@@ -67,15 +67,15 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
       renderEn: () => (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-[#100726]/40 border border-white/10 p-5 rounded-xl">
-            <span className="text-slate-400 text-xs uppercase tracking-wider block font-bold">Legal Name</span>
+            <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Legal Name</span>
             <p className="text-white text-base font-bold mt-1">WeBuildAI4u</p>
           </div>
           <div className="bg-[#100726]/40 border border-white/10 p-5 rounded-xl">
-            <span className="text-slate-400 text-xs uppercase tracking-wider block font-bold">Virtual Location</span>
+            <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Virtual Location</span>
             <p className="text-white text-base font-bold mt-1">Lisbon, Portugal</p>
           </div>
           <div className="bg-[#100726]/40 border border-white/10 p-5 rounded-xl">
-            <span className="text-slate-400 text-xs uppercase tracking-wider block font-bold">Contact Email</span>
+            <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Contact Email</span>
             <a href="mailto:webuildai4u.contact@gmail.com" className="block text-white hover:text-[#22d3ee] transition-colors text-base font-bold mt-1 break-all">
               webuildai4u.contact@gmail.com
             </a>
@@ -92,20 +92,20 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
         <div className="border border-white/10 overflow-hidden rounded-xl bg-[#100726]/20">
           <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 bg-[#100726]/40 p-4">
             <div className="text-[#22d3ee] font-bold text-xs uppercase tracking-wider">Termo</div>
-            <div className="col-span-2 text-slate-400 font-bold text-xs uppercase tracking-wider mt-2 md:mt-0">Significado</div>
+            <div className="col-span-2 text-slate-200 font-bold text-xs uppercase tracking-wider mt-2 md:mt-0">Significado</div>
           </div>
           <div className="divide-y divide-white/5">
             <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-2">
               <div className="font-bold text-white">"Serviços"</div>
-              <div className="col-span-2 text-slate-300">Soluções de inteligência artificial, automatização, desenvolvimento de software e consultoria prestados pela WeBuildAI4u.</div>
+              <div className="col-span-2 text-slate-200">Soluções de inteligência artificial, automatização, desenvolvimento de software e consultoria prestados pela WeBuildAI4u.</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-2">
               <div className="font-bold text-white">"Utilizador" / "Cliente"</div>
-              <div className="col-span-2 text-slate-300">Qualquer entidade, singular ou coletiva, que aceda ou utilize os serviços da WeBuildAI4u.</div>
+              <div className="col-span-2 text-slate-200">Qualquer entidade, singular ou coletiva, que aceda ou utilize os serviços da WeBuildAI4u.</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-2">
               <div className="font-bold text-white">"Conteúdo"</div>
-              <div className="col-span-2 text-slate-300">Dados, textos, ficheiros ou qualquer informação fornecida pelo utilizador no âmbito da prestação dos serviços.</div>
+              <div className="col-span-2 text-slate-200">Dados, textos, ficheiros ou qualquer informação fornecida pelo utilizador no âmbito da prestação dos serviços.</div>
             </div>
           </div>
         </div>
@@ -114,20 +114,20 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
         <div className="border border-white/10 overflow-hidden rounded-xl bg-[#100726]/20">
           <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 bg-[#100726]/40 p-4">
             <div className="text-[#22d3ee] font-bold text-xs uppercase tracking-wider">Term</div>
-            <div className="col-span-2 text-slate-400 font-bold text-xs uppercase tracking-wider mt-2 md:mt-0">Meaning</div>
+            <div className="col-span-2 text-slate-200 font-bold text-xs uppercase tracking-wider mt-2 md:mt-0">Meaning</div>
           </div>
           <div className="divide-y divide-white/5">
             <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-2">
               <div className="font-bold text-white">"Services"</div>
-              <div className="col-span-2 text-slate-300">Artificial intelligence, automation, software development and consulting solutions provided by WeBuildAI4u.</div>
+              <div className="col-span-2 text-slate-200">Artificial intelligence, automation, software development and consulting solutions provided by WeBuildAI4u.</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-2">
               <div className="font-bold text-white">"User" / "Client"</div>
-              <div className="col-span-2 text-slate-300">Any entity, individual or corporate, that accesses or uses the services of WeBuildAI4u.</div>
+              <div className="col-span-2 text-slate-200">Any entity, individual or corporate, that accesses or uses the services of WeBuildAI4u.</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 p-4 gap-2">
               <div className="font-bold text-white">"Content"</div>
-              <div className="col-span-2 text-slate-300">Data, texts, files or any information provided by the user in the context of the services.</div>
+              <div className="col-span-2 text-slate-200">Data, texts, files or any information provided by the user in the context of the services.</div>
             </div>
           </div>
         </div>
@@ -586,7 +586,7 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
           <div className="inline-flex items-center gap-4 bg-[#100726]/60 border border-white/10 rounded-xl p-5">
             <Mail className="w-8 h-8 text-[#22d3ee] shrink-0" />
             <div>
-              <span className="text-[#cbd5e1]/50 text-xs uppercase tracking-wider block font-bold">Email Principal</span>
+              <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Email Principal</span>
               <a href="mailto:webuildai4u.contact@gmail.com" className="text-white hover:text-[#22d3ee] font-bold text-base transition-colors">
                 webuildai4u.contact@gmail.com
               </a>
@@ -602,7 +602,7 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
           <div className="inline-flex items-center gap-4 bg-[#100726]/60 border border-white/10 rounded-xl p-5">
             <Mail className="w-8 h-8 text-[#22d3ee] shrink-0" />
             <div>
-              <span className="text-[#cbd5e1]/50 text-xs uppercase tracking-wider block font-bold">Core Helpdesk</span>
+              <span className="text-slate-200 text-xs uppercase tracking-wider block font-bold">Core Helpdesk</span>
               <a href="mailto:webuildai4u.contact@gmail.com" className="text-white hover:text-[#22d3ee] font-bold text-base transition-colors">
                 webuildai4u.contact@gmail.com
               </a>
@@ -621,7 +621,7 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <button 
             onClick={onBack}
-            className="flex items-center gap-2 text-slate-300 hover:text-white text-sm font-semibold transition-colors cursor-pointer"
+            className="flex items-center gap-2 text-slate-200 hover:text-white text-sm font-semibold transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{isEn ? "Back" : "Voltar"}</span>
@@ -630,13 +630,13 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
           <div className="flex gap-2">
             <button
               onClick={() => setLang('pt')}
-              className={`px-3 py-1 text-xs font-bold rounded cursor-pointer ${lang === 'pt' ? 'bg-[#22d3ee] text-black' : 'text-slate-400 hover:text-white'}`}
+              className={`px-3 py-1 text-xs font-bold rounded cursor-pointer ${lang === 'pt' ? 'bg-[#22d3ee] text-black' : 'text-slate-200 hover:text-white'}`}
             >
               PT
             </button>
             <button
               onClick={() => setLang('en')}
-              className={`px-3 py-1 text-xs font-bold rounded cursor-pointer ${lang === 'en' ? 'bg-[#22d3ee] text-black' : 'text-slate-400 hover:text-white'}`}
+              className={`px-3 py-1 text-xs font-bold rounded cursor-pointer ${lang === 'en' ? 'bg-[#22d3ee] text-black' : 'text-slate-200 hover:text-white'}`}
             >
               EN
             </button>
@@ -651,7 +651,7 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             {isEn ? "Terms & Conditions" : "Termos e Condições"}
           </h1>
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-200 text-sm">
             {isEn 
               ? "Last updated: May 1, 2026" 
               : "Última atualização: 01 de Maio de 2026"}
@@ -665,7 +665,7 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
               <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">
                 {sec.num}. {isEn ? sec.titleEn : sec.titlePt}
               </h2>
-              <div className="text-slate-300 text-sm sm:text-base space-y-4 leading-relaxed font-light">
+              <div className="text-slate-100 text-sm sm:text-base space-y-4 leading-relaxed font-[400]">
                 {isEn ? sec.renderEn() : sec.renderPt()}
               </div>
             </section>
@@ -674,12 +674,12 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
       </main>
 
       {/* Simple Footer */}
-      <footer className="border-t border-white/10 bg-[#030612] py-8 px-6 mt-16 text-center text-slate-500 text-xs">
+      <footer className="border-t border-white/10 bg-[#030612] py-8 px-6 mt-16 text-center text-slate-300 text-xs">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>© {new Date().getFullYear()} WeBuildAI4u</p>
           <button 
             onClick={onBack}
-            className="text-slate-400 hover:text-[#22d3ee] transition-colors text-xs font-semibold cursor-pointer"
+            className="text-slate-200 hover:text-[#22d3ee] transition-colors text-xs font-semibold cursor-pointer"
           >
             {isEn ? "Go to Main Website" : "Ir Para Site Principal"}
           </button>
