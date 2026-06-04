@@ -153,36 +153,105 @@ export default function App() {
             </div>
           </div>
         </nav>
+      </header>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isMenuOpen && (
+      {/* Mobile Menu Backdrop & Drawer */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Dark Backdrop Overlay - allows the site to still be visible underneath */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-[#030208]/80 z-[140] lg:hidden backdrop-blur-xs"
+            />
+
+            {/* Solid Sidebar Drawer - slides in from the right */}
             <motion.div 
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-0 top-[70px] bg-[#030612] z-[90] flex flex-col p-10 space-y-8 lg:hidden"
+              className="fixed right-0 top-0 bottom-0 w-[220px] sm:w-[250px] bg-[#030612] z-[150] flex flex-col p-6 lg:hidden shadow-2xl border-l border-white/10"
+              style={{ backgroundColor: '#030612' }} // Hardcoded solid, opaque color to prevent overlap issues
             >
-              {[
-                { name: t.nav.about, href: '#about' },
-                { name: t.nav.services, href: '#services' },
-                { name: t.nav.process, href: '#process' },
-                { name: t.nav.contact, href: '#contact' }
-              ].map((item) => (
-                <a 
-                  key={item.href} 
-                  href={item.href} 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-2xl font-bold text-white hover:text-[#22d3ee] tracking-wider transition-colors"
-                >
-                  {item.name}
+              {/* Top Bar inside Mobile Drawer */}
+              <div className="flex justify-between items-center pb-6 border-b border-white/10 mb-8">
+                <a href="#" onClick={() => setIsMenuOpen(false)} className="flex flex-col items-center justify-center group" aria-label="WeBuildAI4u Home">
+                  <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-0.5">
+                    <circle cx="50" cy="20" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
+                    <circle cx="20" cy="50" r="5" stroke="#22d3ee" strokeWidth="3" fill="none" />
+                    <circle cx="80" cy="50" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
+                    <circle cx="50" cy="80" r="5" stroke="#a855f7" strokeWidth="3" fill="none" />
+                    <path d="M46 24 L24 46" stroke="#22d3ee" strokeWidth="1.5" />
+                    <path d="M54 24 L76 46" stroke="#a855f7" strokeWidth="1.5" />
+                    <path d="M24 54 L46 76" stroke="#22d3ee" strokeWidth="1.5" />
+                    <path d="M76 54 L54 76" stroke="#a855f7" strokeWidth="1.5" />
+                    <path d="M30 50 L70 50" stroke="#4c1d95" strokeWidth="1.5" strokeDasharray="4 4" />
+                    <circle cx="50" cy="4" r="2" fill="#22d3ee" />
+                    <circle cx="50" cy="96" r="2" fill="#a855f7" />
+                  </svg>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[6px] text-slate-100 tracking-[0.2em] leading-none mb-[1px]">WE</span>
+                    <span className="text-[11px] font-[900] text-[#22d3ee] tracking-[0.14em] leading-none" style={{ textShadow: '0 0 15px rgba(34,211,238,0.5)' }}>BUILD</span>
+                    <span className="text-[6px] text-slate-100 tracking-[0.3em] leading-none mt-[1px]">AI 4 U</span>
+                  </div>
                 </a>
-              ))}
+                <button 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-white p-2 hover:text-[#22d3ee] transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Menu Links */}
+              <div className="flex flex-col space-y-4 w-full">
+                {[
+                  { name: t.nav.about, href: '#about' },
+                  { name: t.nav.services, href: '#services' },
+                  { name: t.nav.process, href: '#process' },
+                  { name: t.nav.contact, href: '#contact' }
+                ].map((item) => (
+                  <a 
+                    key={item.href} 
+                    href={item.href} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-sm sm:text-base font-bold text-white hover:text-[#22d3ee] tracking-wider transition-colors py-3 border-b border-white/5 w-full flex items-center justify-between px-1"
+                  >
+                    <span>{item.name}</span>
+                    <span className="text-[#22d3ee] text-xs sm:text-sm">→</span>
+                  </a>
+                ))}
+              </div>
+
+              {/* Language Switcher inside Mobile drawer */}
+              <div className="mt-auto pt-8 border-t border-white/10 flex flex-col items-center space-y-3 w-full">
+                <div className="text-[10px] uppercase tracking-widest text-slate-200 font-bold block text-center">
+                  {lang === 'pt' ? 'Escolha o Idioma' : 'Choose Language'}
+                </div>
+                <div className="flex items-center bg-[#100726]/50 p-1 rounded-full border border-white/10 mx-auto">
+                  <button 
+                    onClick={() => { setLang('pt'); setIsMenuOpen(false); }}
+                    className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors duration-300 ${lang === 'pt' ? 'bg-[#22d3ee] text-black shadow-lg shadow-[#22d3ee]/20' : 'text-slate-300 hover:text-white'}`}
+                  >
+                    PT
+                  </button>
+                  <button 
+                    onClick={() => { setLang('en'); setIsMenuOpen(false); }}
+                    className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors duration-300 ${lang === 'en' ? 'bg-[#22d3ee] text-black shadow-lg shadow-[#22d3ee]/20' : 'text-slate-300 hover:text-white'}`}
+                  >
+                    EN
+                  </button>
+                </div>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+          </>
+        )}
+      </AnimatePresence>
 
       <main>
         {/* Hero Section */}
@@ -358,9 +427,11 @@ export default function App() {
          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="bg-gradient-to-br from-[#1c0b3b] to-[#0c051f] border border-[#a855f7]/50 rounded-3xl p-12 lg:p-20 shadow-[0_20px_60px_rgba(109,40,217,0.3)] relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.15),transparent_50%)]"></div>
             <h2 className="text-[32px] sm:text-[40px] font-[800] text-white mb-8 relative z-10 max-w-2xl mx-auto">{t.ctaFinal.title}</h2>
-            <a href="#contact" className="relative z-10 inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#22d3ee] text-[#030612] font-[800] text-[16px] rounded-lg transition-all hover:bg-white hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-widest hover:will-change-transform">
-              {t.ctaFinal.button} <ArrowRight className="w-5 h-5 ml-1" />
-            </a>
+            <div className="flex justify-center w-full">
+              <a href="#contact" className="relative z-10 inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#22d3ee] text-[#030612] font-[800] text-[16px] rounded-lg transition-all hover:bg-white hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-widest hover:will-change-transform mx-auto">
+                {t.ctaFinal.button} <ArrowRight className="w-5 h-5 ml-1" />
+              </a>
+            </div>
          </motion.div>
       </section>
 
