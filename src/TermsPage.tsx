@@ -614,7 +614,7 @@ export function TermsPage({ onBack, lang, setLang }: TermsPageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030612] text-white font-sans relative overflow-x-hidden selection:bg-[#22d3ee] selection:text-black">
+    <div className="min-h-screen bg-[#030612] text-white font-sans relative selection:bg-[#22d3ee] selection:text-black">
       
       {/* Simple Header */}
       <header className="border-b border-white/10 bg-[#030612] py-4 px-6 sticky top-0 z-50">

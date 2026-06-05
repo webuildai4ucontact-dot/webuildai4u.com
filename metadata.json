@@ -2,5 +2,7 @@
   "name": "WeBuildAI4u | Elite Web Weapons",
   "description": "We architect high-performance digital weapons. Specializing in AI-driven automation, Zero-Trust security (SSL), and elite web systems that transform processes into simple, scalable solutions.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

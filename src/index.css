@@ -15,6 +15,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   background-color: var(--color-pbg);
   color: var(--color-ptext);
@@ -33,3 +38,6 @@ body {
   background: var(--color-paccent);
   border-radius: 4px;
 }
+
+
+

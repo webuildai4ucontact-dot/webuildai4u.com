@@ -8,9 +8,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, Globe, Mail, Zap, 
   MapPin, Menu, X, ArrowUp, Monitor, CheckCircle2, ShieldCheck,
-  Settings, Layout
+  Settings, Layout, Sparkles
 } from 'lucide-react';
 import { translations } from './lib/translations';
+import AIdaChatbot from './components/AIdaChatbot';
 
 const TermsPage = React.lazy(() => import('./TermsPage').then(module => ({ default: module.TermsPage })));
 
@@ -20,6 +21,7 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentPage, setCurrentPage] = useState<'main' | 'terms'>('main');
   const [isMobile, setIsMobile] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const t = translations[lang];
 
   useEffect(() => {
@@ -38,6 +40,17 @@ export default function App() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   const animationDurationMultiplier = isMobile ? 0.5 : 1.0;
 
@@ -60,7 +73,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#030612] text-white font-sans relative overflow-x-hidden selection:bg-[#22d3ee] selection:text-black">
+    <div className="min-h-screen bg-[#030612] text-white font-sans relative selection:bg-[#22d3ee] selection:text-black">
       
       <style dangerouslySetInnerHTML={{__html: `
         @media (prefers-reduced-motion: no-preference) {
@@ -271,10 +284,23 @@ export default function App() {
               {t.hero.desc}
             </motion.p>
             
-            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mb-16">
+            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mb-8">
               <a href="#contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#6d28d9] text-white font-[800] text-[16px] rounded-lg border border-[#a855f7] shadow-[0_0_40px_rgba(109,40,217,0.5)] transition-transform duration-300 hover:scale-105 uppercase tracking-widest hover:will-change-transform">
                 {t.hero.cta} <ArrowRight className="w-5 h-5 ml-1" />
               </a>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="flex flex-col items-center mb-16 p-6 bg-gradient-to-r from-[#170c30]/90 to-[#0c051f]/95 border border-[#22d3ee]/25 rounded-2xl max-w-xl w-full shadow-[0_0_30px_rgba(109,40,217,0.15)] backdrop-blur-sm">
+              <span className="text-slate-300 text-sm md:text-base font-semibold mb-4 tracking-wide text-center">
+                {lang === 'pt' ? "Pronto para parar de decorar e começar a dominar?" : "Ready to stop decorating and start dominating?"}
+              </span>
+              <button 
+                onClick={() => setIsChatOpen(true)}
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#6d28d9] hover:bg-[#7c3aed] text-white border border-[#a855f7] font-[900] text-[13px] rounded-lg transition-transform duration-300 hover:scale-105 shadow-[0_0_25px_rgba(109,40,217,0.5)] uppercase tracking-widest cursor-pointer hover:will-change-transform"
+              >
+                <Sparkles className="w-4 h-4 text-white animate-pulse" />
+                {lang === 'pt' ? "Iniciar Implementação" : "Initiate Deployment"}
+              </button>
             </motion.div>
 
             {/* Stats Bar */}
@@ -428,19 +454,22 @@ export default function App() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.15),transparent_50%)]"></div>
             <h2 className="text-[32px] sm:text-[40px] font-[800] text-white mb-8 relative z-10 max-w-2xl mx-auto">{t.ctaFinal.title}</h2>
             <div className="flex justify-center w-full">
-              <a href="#contact" className="relative z-10 inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#22d3ee] text-[#030612] font-[800] text-[16px] rounded-lg transition-all hover:bg-white hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-widest hover:will-change-transform mx-auto">
+              <button 
+                onClick={() => setIsChatOpen(true)}
+                className="relative z-10 inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#22d3ee] text-[#030612] font-[800] text-[16px] rounded-lg transition-all hover:bg-white hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.5)] uppercase tracking-widest hover:will-change-transform mx-auto cursor-pointer border-none"
+              >
                 {t.ctaFinal.button} <ArrowRight className="w-5 h-5 ml-1" />
-              </a>
+              </button>
             </div>
          </motion.div>
       </section>
 
       {/* Contact Section & Footer */}
       <section id="contact" aria-label="Contacto e Localização" className="pt-24 bg-[#09041a] border-t border-[#4c1d95]/40 scroll-mt-20 relative">
-        <div className="absolute top-0 right-[-20%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.08)_0%,transparent_70%)] z-0 pointer-events-none"></div>
+         <div className="absolute top-0 right-[-20%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(76,29,149,0.08)_0%,transparent_70%)] z-0 pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
-          <div className="max-w-4xl mx-auto">
+         <div className="max-w-7xl mx-auto px-6 pb-24 relative z-10">
+           <div className="max-w-4xl mx-auto">
             
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="flex flex-col items-center text-center space-y-12">
                <div>
@@ -455,7 +484,7 @@ export default function App() {
                      </div>
                      <div className="text-center">
                         <div className="text-[12px] text-[#22d3ee] uppercase tracking-[0.2em] font-black mb-1">Email</div>
-                        <div className="text-[17px] font-[700] text-white">webuildai4u.contacts@gmail.com</div>
+                        <a href="mailto:webuildai4u.contact@gmail.com" className="text-[17px] font-[700] text-white hover:text-[#22d3ee] transition-colors">webuildai4u.contact@gmail.com</a>
                      </div>
                   </div>
 
@@ -539,6 +568,13 @@ export default function App() {
           </motion.button>
         )}
       </AnimatePresence>
+
+      {/* AIDA AI Chatbot */}
+      <AIdaChatbot 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)} 
+        lang={lang} 
+      />
 
     </div>
   );
